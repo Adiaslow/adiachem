@@ -1,2 +1,2 @@
 # adiachem
-A collection of useful scripts for computational chemistry.
+A collection of useful scripts for bioinformatics, cheminformatics, and machine learning.
