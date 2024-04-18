@@ -55,11 +55,19 @@ hydrophobicity_scale = {
   }
 }
 
+sasa_of_fully_exposed_residues = {
+  'ALA': 64.7809, 'ARG': -0.02, 'ASN': 113.187, 'ASP': -0.50, 'CYS': 95.2439,
+  'GLN': 147.855, 'GLU': -0.54, 'GLY': 23.1338, 'HIS': 147.950, 'HSD': 146.449,
+  'HSE': 149.451, 'ILE': 151.242, 'LEU': 139.524, 'LYS': 177.366, 'MET': 164.674,
+  'PHE': 186.7, 'PRO': 111.533, 'SER': 81.2159, 'THR': 111.597, 'TRP': 229.619,
+  'TYR': 200.306, 'VAL': 124.237
+}
+
 atomic_radii = {
     "H": 1.20, "He": 1.40, "Li": 1.82, "Be": 1.53, "B": 1.92, "C": 1.70,
     "N": 1.55, "O": 1.52, "F": 1.47, "Ne": 1.54, "Na": 2.27, "Mg": 1.73,
     "Al": 1.84, "Si": 2.10, "P": 1.80, "S": 1.80, "Cl": 1.75, "Ar": 1.88,
-    "K": 2.75, "Ca": 2.31, "Sc": 2.11, "Ti": 2.00, "V": 1.92, "Cr": 1.85, 
+    "K": 2.75, "Ca": 2.31, "Sc": 2.11, "Ti": 2.00, "V": 1.92, "Cr": 1.85,
     "Mn": 1.79, "Fe": 1.72, "Ni": 1.63, "Co": 1.63, "Cu": 1.40, "Zn": 1.39,
     "Ga": 1.87, "Ge": 2.11, "As": 1.85, "Se": 1.90, "Br": 1.85, "Kr": 2.02,
     "Rb": 3.03, "Sr": 2.49, "Y": 2.32, "Zr": 2.23, "Nb": 2.18, "Mo": 2.11,
@@ -67,7 +75,7 @@ atomic_radii = {
     "In": 1.82, "Sn": 2.17, "Sb": 2.06, "I": 1.98, "Te": 2.06, "Xe": 2.16,
     "Cs": 3.43, "Ba": 2.68, "La": 2.50, "Ce": 2.48, "Pr": 2.47, "Nd": 2.45,
     "Pm": 2.43, "Sm": 2.42, "Eu": 2.40, "Gd": 2.38, "Tb": 2.37, "Dy": 2.35,
-    "Ho": 2.33, "Er": 2.31, "Tm": 2.29, "Yb": 2.27, "Lu": 2.27, "Hf": 2.25, 
+    "Ho": 2.33, "Er": 2.31, "Tm": 2.29, "Yb": 2.27, "Lu": 2.27, "Hf": 2.25,
     "Ta": 2.20, "W": 2.10, "Re": 2.05, "Os": 2.00, "Ir": 2.00, "Pt": 1.75,
     "Au": 1.66, "Hg": 1.55, "Tl": 1.96, "Pb": 2.02, "Bi": 2.07, "Th": 2.45,
     "Pa": 2.35, "U": 2.38, "Np": 2.37, "Pu": 2.34, "Am": 2.34, "Cm": 2.32,
@@ -75,4 +83,58 @@ atomic_radii = {
     "Lr": 2.22, "Rf": 2.23, "Db": 2.23, "Sg": 2.22, "Bh": 2.23, "Hs": 2.25,
     "Mt": 2.26, "Ds": 2.28, "Rg": 2.31, "Cn": 2.33, "Nh": 2.35, "Fl": 2.37,
     "Mc": 2.38, "Lv": 2.40, "Ts": 2.42, "Og": 2.44
+}
+
+amino_acid_masses = {
+    'ALA': 71.08, 'ARG': 156.19, 'ASN': 114.11, 'ASP': 115.09, 'CYS': 103.15,
+    'GLN': 128.14, 'GLU': 129.12, 'GLY': 57.05, 'HIS': 137.14, 'ILE': 113.16,
+    'LEU': 113.16, 'LYS': 128.18, 'MET': 131.19, 'PHE': 147.18, 'PRO': 97.12,
+    'SER': 87.08, 'THR': 101.11, 'TRP': 186.21, 'TYR': 163.18, 'VAL': 99.13
+}
+
+amino_acid_masses_minus_water = {
+    'ALA': 54.03, 'ARG': 139.14, 'ASN': 97.06, 'ASP': 98.04, 'CYS': 86.10,
+    'GLN': 111.09, 'GLU': 112.07, 'GLY': 45.00, 'HIS': 124.09, 'ILE': 98.11,
+    'LEU': 98.11, 'LYS': 113.13, 'MET': 116.14, 'PHE': 132.13, 'PRO': 82.07,
+    'SER': 72.03, 'THR': 86.06, 'TRP': 171.16, 'TYR': 148.13, 'VAL': 82.08
+}
+
+amino_acid_single_letter_to_three_letter = {
+    'A': 'ALA', 'R': 'ARG', 'N': 'ASN', 'D': 'ASP', 'C': 'CYS',
+    'Q': 'GLN', 'E': 'GLU', 'G': 'GLY', 'H': 'HIS', 'I': 'ILE',
+    'L': 'LEU', 'K': 'LYS', 'M': 'MET', 'F': 'PHE', 'P': 'PRO',
+    'S': 'SER', 'T': 'THR', 'W': 'TRP', 'Y': 'TYR', 'V': 'VAL'
+}
+
+amino_acid_three_letter_to_single_letter = {val: key for key, val in amino_acid_single_letter_to_three_letter.items()}
+
+codon_to_amino_acid = {
+    'TTT': 'Phe', 'TTC': 'Phe', 'TTA': 'Leu', 'TTG': 'Leu',
+    'CTT': 'Leu', 'CTC': 'Leu', 'CTA': 'Leu', 'CTG': 'Leu',
+    'ATT': 'Ile', 'ATC': 'Ile', 'ATA': 'Ile', 'ATG': 'Met',
+    'GTT': 'Val', 'GTC': 'Val', 'GTA': 'Val', 'GTG': 'Val',
+    'TCT': 'Ser', 'TCC': 'Ser', 'TCA': 'Ser', 'TCG': 'Ser',
+    'CCT': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
+    'ACT': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
+    'GCT': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala',
+    'TAT': 'Tyr', 'TAC': 'Tyr', 'TAA': 'Stop', 'TAG': 'Stop',
+    'CAT': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln',
+    'AAT': 'Asn', 'AAC': 'Asn', 'AAA': 'Lys', 'AAG': 'Lys',
+    'GAT': 'Asp', 'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu',
+    'TGT': 'Cys', 'TGC': 'Cys', 'TGA': 'Stop', 'TGG': 'Trp',
+    'CGT': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg',
+    'AGT': 'Ser', 'AGC': 'Ser', 'AGA': 'Arg', 'AGG': 'Arg',
+    'GGT': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly'
+}
+
+amino_acid_to_codon = {
+    'Phe': ['TTT', 'TTC'], 'Leu': ['TTA', 'TTG', 'CTT', 'CTC', 'CTA', 'CTG'],
+    'Ile': ['ATT', 'ATC', 'ATA'], 'Met': ['ATG'], 'Val': ['GTT', 'GTC', 'GTA', 'GTG'],
+    'Ser': ['TCT', 'TCC', 'TCA', 'TCG', 'AGT', 'AGC'], 'Pro': ['CCT', 'CCC', 'CCA', 'CCG'],
+    'Thr': ['ACT', 'ACC', 'ACA', 'ACG'], 'Ala': ['GCT', 'GCC', 'GCA', 'GCG'],
+    'Tyr': ['TAT', 'TAC'], 'Stop': ['TAA', 'TAG', 'TGA'], 'His': ['CAT', 'CAC'],
+    'Gln': ['CAA', 'CAG'], 'Asn': ['AAT', 'AAC'], 'Lys': ['AAA', 'AAG'],
+    'Asp': ['GAT', 'GAC'], 'Glu': ['GAA', 'GAG'], 'Cys': ['TGT', 'TGC'],
+    'Trp': ['TGG'], 'Arg': ['CGT', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG'],
+    'Gly': ['GGT', 'GGC', 'GGA', 'GGG']
 }

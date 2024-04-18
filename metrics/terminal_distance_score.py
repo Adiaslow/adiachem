@@ -93,8 +93,10 @@ centroid = extract_atoms_coordinates(args.input_pdb, args.centroid_atoms)
 binder_vertices = extract_chain_vertices(args.input_pdb, args.binder)
 distances = calculate_distances(centroid, binder_vertices)
 rmsd = sqrt(mean(npsum((centroid - binder_vertices)**2, axis=1)))
+n_term_score = round(distances[0]/rmsd,3)
+c_term_score = round(distances[-1]/rmsd,3)
 
 end_time = time.time()
 elapsed_time = end_time - start_time
 
-print(f"{distances[0]/rmsd:.3f}")
+print(f"N Term Score = {n_term_score}, C Term Score = {c_term_score}")

@@ -1,4 +1,3 @@
-#  rmsd_calculation.py -i input_pdb -c1 A -r reference_pdb -c2 A 
 import argparse
 from numpy import sum as npsum
 from numpy import array, mean, sqrt
@@ -10,21 +9,18 @@ import time
 start_time = time.time()
 
 parser = argparse.ArgumentParser(
-                    prog='Count Number of Secondary Structures',
-                    description='Takes in a PDB file, calculates the Morlet Wavelet Transform' 
-                    'of the flattened distance matrix, and finds local minima to estimate'
-                    'the number of secondary structures.')
+                    prog='Align structures.')
 
-parser.add_argument('-i0', '--input0', dest='reference_pdb', required=True, help='Input PDB file.')
-parser.add_argument('-i1', '--input1', dest='test_pdb', required=True, help='Input PDB file.')
+parser.add_argument('-i1', '--input0', dest='reference_pdb', required=True, help='Input PDB file.')
+parser.add_argument('-i2', '--input1', dest='test_pdb', required=True, help='Input PDB file.')
 parser.add_argument('-a', '--atoms', dest='atoms', default="alpha-carbons",
                     choices=["all", "backbone", "backbone-no-carbonyl", "alpha-carbons"],
                     help='Atoms to consider.')
-parser.add_argument('-c0', '--chain0', dest='reference_chains', required=True, type=list, default="A",
+parser.add_argument('-c1', '--chain0', dest='reference_chains', required=True, type=list, default="A",
                     help='Which chain to consider for the reference pdb.')
-parser.add_argument('-c1', '--chain1', dest='test_chains', required=True, type=list, default="A",
+parser.add_argument('-c2', '--chain1', dest='test_chains', required=True, type=list, default="A",
                     help='Which chain to consider for the test pdb.')
-parser.add_argument('-m', '--alignment-method', dest='alignment_method', required=True, default="kabsch",
+parser.add_argument('-m', '--alignment-method', dest='alignment_method', required=True, default="lsf",
 					choices=["kabsch", "lsf", "svd", "quaternion"], help='Which chain to consider for the test pdb.')
 
 args = parser.parse_args()
@@ -55,10 +51,6 @@ def extract_vertices(pdb, atoms, chains):
                     atom_vertex = [float(temp_atom[6]), float(temp_atom[7]), float(temp_atom[8])]
                     verticies.append(atom_vertex)
     return array(verticies)
-
-def calculate_rmsd(protein1, protein2):
-	return sqrt(mean(npsum((protein1 - protein2)**2, axis=1)))
-
 
 def svd_alignment(protein1, protein2):
     protein1 = array(protein1)

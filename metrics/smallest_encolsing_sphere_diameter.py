@@ -15,7 +15,7 @@ parser.add_argument('-i', '--input', dest='pdb_file', required=True, help='Input
 parser.add_argument('-c', '--chain', dest='chain', required=True, help='Which chain to consider.')
 parser.add_argument('-n', '--num-samples', dest='num_samples', type=int, required=True,
                     help='Number of samples to average.')
-parser.add_argument('-z', '--z-threshold', dest='z_threshold', required=True, 
+parser.add_argument('-z', '--z-threshold', dest='z_threshold', required=True,
                     help='Z score threshold for rejecting outliers.')
 parser.add_argument('-a', '--atoms', dest='atoms', required=True,
                     choices=["all", "backbone", "backbone-no-carbonyl", "alpha-carbons"],
@@ -133,28 +133,23 @@ def calculate_sesd(pep_verts):
     return center, radius, sesd
 
 
-def reject_outliers(data, threshold=3):
-    """
-    Reject outliers from a list of floats using the Z-score method with median.
-    
-    Args:
-        data (list): A list of float values.
-        threshold (float): The threshold for considering a value as an outlier.
-                           Default is 3.
-                           
-    Returns:
-        list: A new list with outliers removed.
-    """
+def reject_outliers(data, threshold=1):
     median = np.median(data)
     mad = np.median(np.abs(data - median))
-    z_scores = 0.6745 * (data - median) / mad
+
+    # Check if mad is zero, and handle accordingly
+    if mad == 0:
+        z_scores = np.zeros_like(data)
+    else:
+        z_scores = 0.6745 * (data - median) / mad
+
     filtered_data = [x for x, z in zip(data, z_scores) if np.all(np.abs(z) < threshold)]
-    
+
     return filtered_data
 
 
-def calculate_average_sesd(pdb, n, a, z_threshold):
-    verticies = extract_vertices(pdb, a)
+def calculate_average_sesd(pdb, n, a, c, z_threshold):
+    verticies = extract_vertices(pdb, a, c)
     sys.setrecursionlimit(10**6)
 
     center_list = []
@@ -186,7 +181,7 @@ def calculate_average_sesd(pdb, n, a, z_threshold):
     return average_center, average_radius, average_sesd, sesd_standard_deviation, final_n
 
 
-center, radius, sesd, sesd_standard_deviation, final_n = calculate_average_sesd(pdb_file, num_samples, atoms, z_threshold)
+center, radius, sesd, sesd_standard_deviation, final_n = calculate_average_sesd(pdb_file, num_samples, atoms, chain, z_threshold)
 end_time = time.time()
 elapsed_time = end_time - start_time
 
